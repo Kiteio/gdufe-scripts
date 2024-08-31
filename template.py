@@ -1,4 +1,4 @@
-import colorama, threading, ddddocr
+import colorama, threading, sys, ddddocr
 from datetime import datetime
 from requests import Session
 from bs4 import BeautifulSoup
@@ -8,21 +8,24 @@ class Log:
     """日志"""
 
     @staticmethod
-    def __log(tag: str, color: colorama.Fore, username: int, message: str):
+    def __log(tag: str, color: colorama.Fore, username: int, message: str, offset: int = 0):
         """
         日志输出
         :param tag: 标签
         :param color: 标签颜色
         :param username: 学号
         :param message: 消息
+        :param offset: 标签后偏移量
         """
         # 日期时间 yyyy-mm-dd HH:MM:SS
         _ = (colorama.Fore.LIGHTBLUE_EX +
              datetime.now().strftime("%Y-%m-%d %H:%M:%S") +
              colorama.Fore.RESET)
+        # 线程名
+        current_thread_name = threading.current_thread().name
 
-        # 时间 [线程] [标签] <学号> 消息
-        print(f"{_} [{threading.current_thread().name}] {color}[{tag}]{colorama.Fore.RESET} <{username}> {message}")
+        # 时间 [线程] [标签][偏移] <学号> 消息
+        print(f"{_} [{current_thread_name}] {color}[{tag}]{colorama.Fore.RESET}{' ' * offset} <{username}> {message}")
 
     @staticmethod
     def i(username: int, message: str):
@@ -31,7 +34,7 @@ class Log:
         :param username: 学号
         :param message: 消息
         """
-        Log.__log("INFO", colorama.Fore.LIGHTGREEN_EX, username, message)
+        Log.__log("INFO", colorama.Fore.LIGHTGREEN_EX, username, message, 1)
 
     @staticmethod
     def e(username: int, message: str):
@@ -41,6 +44,7 @@ class Log:
         :param message: 消息
         """
         Log.__log("ERROR", colorama.Fore.RED, username, message)
+        sys.exit(1)
 
 
 class Router:
