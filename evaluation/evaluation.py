@@ -97,11 +97,11 @@ class EduSystem(Router):
         :param name: 学号
         :param pwd: 门户密码
         """
-        super().__init__("http://jwxt.gdufe.edu.cn/jsxsd")
+        super().__init__("http://jwxt.gdufe.edu.cn")
 
         with Session() as session:
             # 获取验证码和 Cookie
-            response = session.get(self.route("/verifycode.servlet"))
+            response = session.get(self.route("/jsxsd/verifycode.servlet"))
 
             # 识别验证码
             ocr = ddddocr.DdddOcr(show_ad=False)
@@ -113,7 +113,7 @@ class EduSystem(Router):
                 "PASSWORD": pwd,
                 "RANDOMCODE": code
             }
-            response = session.post(self.route("/xk/LoginToXkLdap"), data=data)
+            response = session.post(self.route("/jsxsd/xk/LoginToXkLdap"), data=data)
             soup = BeautifulSoup(response.text, "html.parser")
 
             # 确认登录结果
@@ -133,7 +133,7 @@ class EduSystem(Router):
         获取评教项列表
         :return: 评教项列表
         """
-        response = self.__session.get(self.route("/xspj/xspj_find.do"))
+        response = self.__session.get(self.route("/jsxsd/xspj/xspj_find.do"))
         soup = BeautifulSoup(response.text, "html.parser")
         table = soup.find("table", class_="Nsb_r_list Nsb_table")
         rows = table.find_all("tr")
@@ -220,7 +220,7 @@ class EduSystem(Router):
                         data.append((options[option_index]["name"], options[option_index]["value"]))
 
             # 上传表单
-            self.__session.post(self.route("/xspj/xspj_save.do"), data=data)
+            self.__session.post(self.route("/jsxsd/xspj/xspj_save.do"), data=data)
             Log.i(self.name, f"{'已评价' if submit else '已保存'} {item.id} {item.name} {item.teacher}")
 
 

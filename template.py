@@ -71,11 +71,11 @@ class EduSystem(Router):
         :param name: 学号
         :param pwd: 门户密码
         """
-        super().__init__("http://jwxt.gdufe.edu.cn/jsxsd")
+        super().__init__("http://jwxt.gdufe.edu.cn")
 
         with Session() as session:
             # 获取验证码和 Cookie
-            response = session.get(self.route("/verifycode.servlet"))
+            response = session.get(self.route("/jsxsd/verifycode.servlet"))
 
             # 识别验证码
             ocr = ddddocr.DdddOcr(show_ad=False)
@@ -87,7 +87,7 @@ class EduSystem(Router):
                 "PASSWORD": pwd,
                 "RANDOMCODE": code
             }
-            response = session.post(self.route("/xk/LoginToXkLdap"), data=data)
+            response = session.post(self.route("/jsxsd/xk/LoginToXkLdap"), data=data)
             soup = BeautifulSoup(response.text, "html.parser")
 
             # 确认登录结果
