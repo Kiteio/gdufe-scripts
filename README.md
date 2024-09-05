@@ -10,7 +10,7 @@
 ```
 gdufe-scripts
 ├── course               # 选课脚本（TODO）
-├── evaluation           # 评教脚本
+├── evaluation           # 教学评价脚本
 ├── network              # 校园网登录脚本
 ├── requiremenet.txt     # template.py 依赖库
 └── template.py          # 教务系统脚本模板文件

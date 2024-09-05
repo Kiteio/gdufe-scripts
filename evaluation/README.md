@@ -1,4 +1,4 @@
-# 教学评价
+# 教学评价脚本
 
 > 本模块未测试，请使用 [gdufe-evaluate](https://github.com/Kiteio/gdufe-evaluate) 代替
 

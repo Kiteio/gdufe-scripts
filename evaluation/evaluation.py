@@ -4,12 +4,10 @@ from requests import Session
 from bs4 import BeautifulSoup
 from dataclasses import dataclass
 
-
 """
 WARN 未测试，本行注释移除前请谨慎使用
 请使用 https://github.com/Kiteio/gdufe-evaluate 代替
 """
-
 
 """配置"""
 # 学号
@@ -83,11 +81,11 @@ class Router:
 @dataclass
 class EvaluateItem:
     """评教项"""
-    id: str         # 课程编号
-    name: str       # 课程名称
-    teacher: str    # 教师
-    sort: str       # 课程类别
-    route: str      # 评教路由
+    id: str  # 课程编号
+    name: str  # 课程名称
+    teacher: str  # 教师
+    sort: str  # 课程类别
+    route: str  # 评教路由
 
 
 class EduSystem(Router):
@@ -176,7 +174,6 @@ class EduSystem(Router):
         else:
             Log.e(self.name, "教学评价未开放")
             return []
-
 
     def evaluate(self, items: list[EvaluateItem], submit: bool = True):
         """
