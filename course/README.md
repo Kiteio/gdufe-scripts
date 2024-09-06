@@ -7,9 +7,18 @@
 
 ## 快速上手
 
-1. 下载 Python（推荐最新版）
-2. 将 [course.py](course.py) 保存到电脑
-3. 在 [course.py](course.py) 中配置参数<br/>
+1. 安装 [Python](https://www.python.org/downloads/)（推荐最新版，记得勾选`Add Python [版本号] to PATH`）。
+2. 在命令行使用`pip`下载 [requirements.txt](requirements.txt) 提到的依赖<br/>
+   例如：
+   ```
+   pip install colorama
+   ```
+   如果熟悉用 [requirements.txt](requirements.txt) 安装也可以保存该文件，在命令行定位到该文件所在文件夹，并输入以下命令：
+   ```
+   pip install -r requirements.txt
+   ```
+3. 将 [course.py](course.py) 保存到电脑
+4. 在 [course.py](course.py) 中配置参数<br/>
    参数说明：
 
    | 参数               | 类型    | 描述                                                                         |
@@ -33,5 +42,5 @@
    | `TEACHER`     | `str` | 教师名。可以为空                                           |
    | `DAY_OF_WEEK` | `str` | 星期几。可以为空，有效值：`1`、`2`、`3`、`4`、`5`、`6`、`7`           |
    | `SECTION`     | `str` | 节次。可以为空，有效值：`1-2`、`3-4`、`5-6`、`7-8`、`9-10`、`11-12` |
-4. 运行代码
+5. 运行代码
 
