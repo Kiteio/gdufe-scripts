@@ -9,7 +9,7 @@
 ## 结构
 ```
 gdufe-scripts
-├── course               # 选课脚本（TODO）
+├── course               # 选课脚本
 ├── evaluation           # 教学评价脚本
 ├── network              # 校园网登录脚本
 ├── requiremenet.txt     # template.py 依赖库
