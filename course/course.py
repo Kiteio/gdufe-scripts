@@ -6,11 +6,6 @@ from enum import Enum
 from dataclasses import dataclass
 from urllib.parse import quote
 
-"""
-WARN 未测试，本行注释移除前请谨慎使用
-请使用 https://github.com/Kiteio/gdufe-course 代替
-"""
-
 """配置"""
 # 学号
 USERNAME = 12345678910
@@ -173,7 +168,7 @@ class CourseSystem(Router):
 
         return self.__parse(
             self.__session.post(
-                self.route(self.route(f"/jsxsd/xsxkkc/xsxk{sort.route.capitalize()}xk")),
+                self.route(f"/jsxsd/xsxkkc/xsxk{sort.route.capitalize()}xk"),
                 self.__form(page)
             ),
             sort
