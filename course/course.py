@@ -40,7 +40,7 @@ TEACHER = ""
 # 星期几上课，空则不限制，填入特定数字，如 1，则表示只显示星期一的课程
 # 有效值：空值 | 1 | 2 | 3 | 4 | 5 | 6 | 7
 DAY_OF_WEEK = ""
-# 节次
+# 节次，如果该值不为空，则 DAY_OF_WEEK 也必须不为空
 # 有效值：空值 | 1-2 | 3-4 | 5-6 | 7-8 | 9-10 | 11-12
 SECTION = ""
 
@@ -191,10 +191,10 @@ class CourseSystem(Router):
 
         section = section if section == "" or section.endswith("-") else section + "-"
         params = {
-            "kcxx": self.__encode(name),
-            "skls": self.__encode(teacher),
-            "skxq": self.__encode(day_of_week),
-            "skjc": self.__encode(section),
+            "kcxx": quote(name),
+            "skls": quote(teacher),
+            "skxq": day_of_week,
+            "skjc": section,
             "sfym": "false",
             "sfct": "false"
         }
@@ -207,15 +207,6 @@ class CourseSystem(Router):
             ),
             sort
         )
-
-    @staticmethod
-    def __encode(text: str) -> str:
-        """
-        二次编码
-        :param text: 待编码字符串
-        :return: 二次编码后字符串
-        """
-        return quote(quote(text))
 
     def __check_sort(self, sort: Sort, predicate: bool):
         """
@@ -275,9 +266,9 @@ class CourseSystem(Router):
 
         try:
             if json["success"]:
-                Log.i(self.name, "选课成功")
+                Log.i(self.name, f"{course.name} {course.teacher} {course.time} 选课成功")
             else:
-                Log.i(self.name, json["message"])
+                Log.i(self.name, f"{course.name} {course.teacher} {course.time} {json['message']}")
                 time.sleep(interval)
 
                 self.pick(course, interval)
